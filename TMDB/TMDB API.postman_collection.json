@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "1db98d28-2a2c-4baa-85fa-9e9a13fdcb59",
+		"name": "TMDB API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42251888"
+	},
+	"item": [
+		{
+			"name": "MOVIE LIST",
+			"item": [
+				{
+					"name": "popular",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/popular?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"popular"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "top rated",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/top_rated?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"top_rated"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upcoming",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/upcoming?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"upcoming"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MOVIES",
+			"item": [
+				{
+					"name": "changes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/749170/changes?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"749170",
+								"changes"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/541671?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"541671"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/ 846422/lists?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								" 846422",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "latest",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/latest?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BEARER_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"value\": 8\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.themoviedb.org/3/movie/1011477/rating",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"movie",
+								"1011477",
+								"rating"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LISTS",
+			"item": [
+				{
+					"name": "check Item Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.themoviedb.org/3/list/8542348/item_status?api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"list",
+								"8542348",
+								"item_status"
+							],
+							"query": [
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"media_id\": 551\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.themoviedb.org/3/list/8542348/add_item?session_id={{SESSION_ID}}&api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"list",
+								"8542348",
+								"add_item"
+							],
+							"query": [
+								{
+									"key": "session_id",
+									"value": "{{SESSION_ID}}"
+								},
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"My Favourite Shows\",\r\n  \"iso_639_1\": \"en\",\r\n  \"description\": \"This is a list of my favourite TV shows and movies.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.themoviedb.org/3/list?session_id={{SESSION_ID}}&api_key={{API_KEY}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"themoviedb",
+								"org"
+							],
+							"path": [
+								"3",
+								"list"
+							],
+							"query": [
+								{
+									"key": "session_id",
+									"value": "{{SESSION_ID}}"
+								},
+								{
+									"key": "api_key",
+									"value": "{{API_KEY}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "4bb61ecc-f07f-446c-a54c-41ff2018dd33",
+		"name": "Coingecko API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42251888"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"item": [
+				{
+					"name": "Check API server status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.coingecko.com/api/v3/ping",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coingecko",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coins",
+			"item": [
+				{
+					"name": "Coins List",
+					"protocolProfileBehavior": {
+						"followOriginalHttpMethod": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.coingecko.com/api/v3/coins/list",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coingecko",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"coins",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Coin Data by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.coingecko.com/api/v3/coins/bitcoin",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coingecko",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"coins",
+								"bitcoin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Coins List with Market Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coingecko",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"coins",
+								"markets"
+							],
+							"query": [
+								{
+									"key": "vs_currency",
+									"value": "usd"
+								},
+								{
+									"key": "ids",
+									"value": "bitcoin"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Simple",
+			"item": [
+				{
+					"name": "Coin Price by IDs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+							"protocol": "https",
+							"host": [
+								"api",
+								"coingecko",
+								"com"
+							],
+							"path": [
+								"api",
+								"v3",
+								"simple",
+								"price"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "bitcoin"
+								},
+								{
+									"key": "vs_currencies",
+									"value": "usd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
