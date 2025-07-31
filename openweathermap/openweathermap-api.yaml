@@ -1,0 +1,550 @@
+openapi: 3.0.3
+info:
+  title: OpenWeatherMap API
+  version: 1.0.0
+  description: Access weather, air pollution, and geocoding data using OpenWeatherMap's reliable APIs.
+
+servers:
+  - url: https://api.openweathermap.org
+
+paths:
+  /data/2.5/weather:
+    get:
+      summary: Get Current Weather by Location
+      description: This endpoint provides the current weather conditions for any given geographical coordinates (latitude and longitude).
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LatParam'
+        - $ref: '#/components/parameters/LonParam'
+      responses:
+        '200':
+          description: Successfully retrieved current weather data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Weather'
+              example:
+                $ref: '#/components/examples/CurrentWeatherExample'
+        '400':
+          description: Bad Request – Please check your latitude and longitude parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '401':
+          description: Unauthorized – Your API key is either invalid or missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '500':
+          description: Internal Server Error – An unexpected issue occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+
+  /map/{layer}/{z}/{x}/{y}.png:
+    get:
+      summary: Get Weather Map Tile
+      description: This endpoint delivers a PNG image representing a specific weather layer (like clouds or wind) for a given map tile.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: layer
+          in: path
+          required: true
+          description: The type of weather data you want to display on the map (e.g., 'clouds', 'precipitation', 'wind').
+          schema:
+            type: string
+            enum:
+              - clouds_new
+              - precipitation_new
+              - pressure_new
+              - wind_new
+              - temp_new
+          example: clouds_new
+        - name: z
+          in: path
+          required: true
+          description: The zoom level for the map tile (usually between 0 and 18, where higher numbers mean more detail).
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 18
+          example: 5
+        - name: x
+          in: path
+          required: true
+          description: The X-coordinate of the map tile on the grid.
+          schema:
+            type: integer
+            minimum: 0
+          example: 10
+        - name: y
+          in: path
+          required: true
+          description: The Y-coordinate of the map tile on the grid.
+          schema:
+            type: integer
+            minimum: 0
+          example: 10
+      responses:
+        '200':
+          description: Successfully retrieved the weather map tile as a PNG image.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized – Your API key is either invalid or missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '404':
+          description: Not Found – The requested tile or weather layer could not be found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '500':
+          description: Internal Server Error – An unexpected issue occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+
+  /data/2.5/air_pollution:
+    get:
+      summary: Get Air Pollution Data by Location
+      description: This endpoint provides current air pollution and Air Quality Index (AQI) data for a specified geographical location.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/LatParam'
+        - $ref: '#/components/parameters/LonParam'
+      responses:
+        '200':
+          description: Successfully retrieved air pollution data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirPollution'
+              example:
+                $ref: '#/components/examples/AirPollutionExample'
+        '400':
+          description: Bad Request – Please check your latitude and longitude parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '401':
+          description: Unauthorized – Your API key is either invalid or missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '500':
+          description: Internal Server Error – An unexpected issue occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+
+  /geo/1.0/direct:
+    get:
+      summary: Convert Location Name to Coordinates (Geocoding)
+      description: This endpoint translates a location name (e.g., "London", "Paris, France") into its corresponding geographical coordinates. You can optionally include state and country for more precise results.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: The location name you want to convert to coordinates. You can specify it as "city", "city,state", or "city,state,country".
+          schema:
+            type: string
+          example: "London"
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of matching locations to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+          example: 5
+      responses:
+        '200':
+          description: Successfully retrieved a list of matching locations with their coordinates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Geocoding'
+              example:
+                $ref: '#/components/examples/GeocodingExample'
+        '400':
+          description: Bad Request – The query parameter 'q' is either missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '401':
+          description: Unauthorized – Your API key is either invalid or missing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+        '500':
+          description: Internal Server Error – An unexpected issue occurred on the server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                $ref: '#/components/examples/ErrorExample'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: query
+      name: appid
+      description: Your unique API key, required for all requests to authenticate with the OpenWeatherMap service.
+
+  parameters:
+    LatParam:
+      name: lat
+      in: query
+      required: true
+      description: The latitude coordinate of the desired location.
+      schema:
+        type: number
+        format: float
+        minimum: -90
+        maximum: 90
+      example: 6.5244
+    LonParam:
+      name: lon
+      in: query
+      required: true
+      description: The longitude coordinate of the desired location.
+      schema:
+        type: number
+        format: float
+        minimum: -180
+        maximum: 180
+      example: 3.3792
+
+  schemas:
+    Weather:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+              format: float
+              description: Longitude of the location.
+            lat:
+              type: number
+              format: float
+              description: Latitude of the location.
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Weather condition ID.
+              main:
+                type: string
+                description: Group of weather parameters (Rain, Snow, Clouds etc.).
+              description:
+                type: string
+                description: Weather condition within the group.
+              icon:
+                type: string
+                description: Weather icon ID.
+        base:
+          type: string
+          description: Internal parameter.
+        main:
+          type: object
+          properties:
+            temp:
+              type: number
+              format: float
+              description: Temperature in Kelvin.
+            feels_like:
+              type: number
+              format: float
+              description: Temperature in Kelvin, adjusted for human perception.
+            pressure:
+              type: integer
+              description: Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level) in hPa.
+            humidity:
+              type: integer
+              description: Humidity in percentage (%).
+        visibility:
+          type: integer
+          description: Visibility in meters.
+        wind:
+          type: object
+          properties:
+            speed:
+              type: number
+              format: float
+              description: Wind speed in meter/sec.
+            deg:
+              type: integer
+              description: Wind direction in degrees (meteorological).
+        clouds:
+          type: object
+          properties:
+            all:
+              type: integer
+              description: Cloudiness in percentage (%).
+        dt:
+          type: integer
+          format: int64
+          description: Time of data calculation, Unix, UTC.
+        sys:
+          type: object
+          properties:
+            type:
+              type: integer
+              description: Internal parameter.
+            id:
+              type: integer
+              description: Internal parameter.
+            country:
+              type: string
+              description: Country code (GB, US, etc.).
+            sunrise:
+              type: integer
+              format: int64
+              description: Sunrise time, Unix, UTC.
+            sunset:
+              type: integer
+              format: int64
+              description: Sunset time, Unix, UTC.
+        timezone:
+          type: integer
+          description: Shift in seconds from UTC.
+        id:
+          type: integer
+          description: City ID.
+        name:
+          type: string
+          description: City name.
+        cod:
+          type: integer
+          description: Internal parameter.
+
+    AirPollution:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+              format: float
+              description: Longitude of the location.
+            lat:
+              type: number
+              format: float
+              description: Latitude of the location.
+        list:
+          type: array
+          items:
+            type: object
+            properties:
+              main:
+                type: object
+                properties:
+                  aqi:
+                    type: integer
+                    description: Air Quality Index (1-5, where 1 is good and 5 is very poor).
+                    minimum: 1
+                    maximum: 5
+              components:
+                type: object
+                properties:
+                  co:
+                    type: number
+                    format: float
+                    description: Carbon monoxide concentration ($ \mu g/m^3 $)
+                  no:
+                    type: number
+                    format: float
+                    description: Nitrogen monoxide concentration ($ \mu g/m^3 $)
+                  no2:
+                    type: number
+                    format: float
+                    description: Nitrogen dioxide concentration ($ \mu g/m^3 $)
+                  o3:
+                    type: number
+                    format: float
+                    description: Ozone concentration ($ \mu g/m^3 $)
+                  so2:
+                    type: number
+                    format: float
+                    description: Sulphur dioxide concentration ($ \mu g/m^3 $)
+                  pm2_5:
+                    type: number
+                    format: float
+                    description: Fine particles matter concentration ($ \mu g/m^3 $)
+                  pm10:
+                    type: number
+                    format: float
+                    description: Coarse particulate matter concentration ($ \mu g/m^3 $)
+                  nh3:
+                    type: number
+                    format: float
+                    description: Ammonia concentration ($ \mu g/m^3 $)
+              dt:
+                type: integer
+                format: int64
+                description: The timestamp of when the data was calculated (Unix, UTC).
+
+    Geocoding:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the found location.
+          local_names:
+            type: object
+            additionalProperties:
+              type: string
+            description: Names of the location in different languages.
+          lat:
+            type: number
+            format: float
+            description: Latitude of the location.
+          lon:
+            type: number
+            format: float
+            description: Longitude of the location.
+          country:
+            type: string
+            description: Country code (e.g., "US", "GB").
+          state:
+            type: string
+            description: State of the found location (if applicable).
+
+    Error:
+      type: object
+      required:
+        - status_code
+        - status_message
+        - success
+      properties:
+        status_code:
+          type: integer
+          description: HTTP status code of the error.
+        status_message:
+          type: string
+          description: A detailed message explaining the error.
+        success:
+          type: boolean
+          description: Indicates whether the request was successful. Will always be false for an error.
+
+  examples:
+    CurrentWeatherExample:
+      value:
+        coord:
+          lon: 3.3792
+          lat: 6.5244
+        weather:
+          - id: 211
+            main: Thunderstorm
+            description: thunderstorm
+            icon: "11n"
+        base: stations
+        main:
+          temp: 298.27
+          feels_like: 299.29
+          pressure: 1011
+          humidity: 94
+        visibility: 8000
+        wind:
+          speed: 1.54
+          deg: 220
+        clouds:
+          all: 20
+        dt: 1750790921
+        sys:
+          type: 1
+          id: 1185
+          country: NG
+          sunrise: 1750743231
+          sunset: 1750788231
+        timezone: 3600
+        id: 2566677
+        name: Shogunle
+        cod: 200
+    AirPollutionExample:
+      value:
+        coord:
+          lon: 3.3792
+          lat: 6.5244
+        list:
+          - main:
+              aqi: 1
+            components:
+              co: 107.89
+              no: 0
+              no2: 0.07
+              nh3: 0.01
+            dt: 1750798781
+    GeocodingExample:
+      value:
+        - name: London
+          local_names:
+            cv: "Лондон"
+            sl: "London"
+            gu: "લંડન"
+            sv: "London"
+            an: "Londres"
+          lat: 51.5073219
+          lon: -0.1276474
+          country: "GB"
+          state: "England"
+    ErrorExample:
+      summary: Generic Error Response
+      value:
+        status_code: 400 
+        status_message: "The request was invalid or cannot be otherwise served. Please check your parameters."
+        success: false
