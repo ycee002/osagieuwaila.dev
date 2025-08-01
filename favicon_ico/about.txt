@@ -1,0 +1,8 @@
+<!--
+Favicon Font Attribution:
+- Font Name: Poppins
+- Font Author: Indian Type Foundry
+- Font Source: https://fonts.google.com/specimen/Poppins
+- Font License: SIL Open Font License, Version 1.1 (https://scripts.sil.org/OFL)
+- Used via Google Fonts and for favicon text generation
+-->
