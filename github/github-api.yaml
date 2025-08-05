@@ -633,4 +633,5 @@ components:
           type: string
           description: A clear, easy-to-understand error message.
       required:
+
         - error
