@@ -27,7 +27,7 @@ paths:
               example:
                 $ref: '#/components/examples/CurrentWeatherExample'
         '400':
-          description: Bad Request – Please check your latitude and longitude parameters.
+          description: Bad Request. Please check your latitude and longitude parameters.
           content:
             application/json:
               schema:
@@ -35,7 +35,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '401':
-          description: Unauthorized – Your API key is either invalid or missing.
+          description: Unauthorized. Your API key is either invalid or missing.
           content:
             application/json:
               schema:
@@ -43,7 +43,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '500':
-          description: Internal Server Error – An unexpected issue occurred on the server.
+          description: Internal Server Error. An unexpected issue occurred on the server.
           content:
             application/json:
               schema:
@@ -105,7 +105,7 @@ paths:
                 type: string
                 format: binary
         '401':
-          description: Unauthorized – Your API key is either invalid or missing.
+          description: Unauthorized. Your API key is either invalid or missing.
           content:
             application/json:
               schema:
@@ -113,7 +113,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '404':
-          description: Not Found – The requested tile or weather layer could not be found.
+          description: Not Found. The requested tile or weather layer could not be found.
           content:
             application/json:
               schema:
@@ -121,7 +121,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '500':
-          description: Internal Server Error – An unexpected issue occurred on the server.
+          description: Internal Server Error. An unexpected issue occurred on the server.
           content:
             application/json:
               schema:
@@ -148,7 +148,7 @@ paths:
               example:
                 $ref: '#/components/examples/AirPollutionExample'
         '400':
-          description: Bad Request – Please check your latitude and longitude parameters.
+          description: Bad Request. Please check your latitude and longitude parameters.
           content:
             application/json:
               schema:
@@ -156,7 +156,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '401':
-          description: Unauthorized – Your API key is either invalid or missing.
+          description: Unauthorized. Your API key is either invalid or missing.
           content:
             application/json:
               schema:
@@ -164,7 +164,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '500':
-          description: Internal Server Error – An unexpected issue occurred on the server.
+          description: Internal Server Error. An unexpected issue occurred on the server.
           content:
             application/json:
               schema:
@@ -205,7 +205,7 @@ paths:
               example:
                 $ref: '#/components/examples/GeocodingExample'
         '400':
-          description: Bad Request – The query parameter 'q' is either missing or invalid.
+          description: Bad Request. The query parameter 'q' is either missing or invalid.
           content:
             application/json:
               schema:
@@ -213,7 +213,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '401':
-          description: Unauthorized – Your API key is either invalid or missing.
+          description: Unauthorized. Your API key is either invalid or missing.
           content:
             application/json:
               schema:
@@ -221,7 +221,7 @@ paths:
               example:
                 $ref: '#/components/examples/ErrorExample'
         '500':
-          description: Internal Server Error – An unexpected issue occurred on the server.
+          description: Internal Server Error. An unexpected issue occurred on the server.
           content:
             application/json:
               schema:
